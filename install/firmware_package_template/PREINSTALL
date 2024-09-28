@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+
+#
+# Back up previous ChargerV2
+# Back up as much as possible, even if error happens in the middle
+#
+
+mkdir ${HOME}/EvMegaBackups
+pushd ${HOME}/EvMegaBackups || exit 1
+
+echo "Backing up Desktop..."
+tar -C ${HOME} -czf Desktop.tgz ./Desktop
+
+echo "Backing up Charger..."
+tar -C ${HOME} -czf Charger.tgz ./Charger
+
+echo "Backing up Downloads..."
+tar -C ${HOME} -czf Downloads.tgz ./Downloads
+
+echo "Backing up upfiles..."
+tar -C ${HOME} -czf upfiles.tgz ./upfiles
+
+echo "Backing up Qt-5.12.4 ..."
+tar -C /usr/local -czf Qt-5.12.4.tgz Qt-5.12.4
+
+echo "Backing up website ..."
+tar -C /var/www -czf html.tgz ./html
+
+
+echo "Backup finished."

@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+#
+# Restore previous ChargerV2
+# Restore as much as possible
+#
+pushd ${HOME}/EvMegaBackups || exit 1
+
+# arguments: <module>, <parent-dir>
+restore_dir() {
+	# backs up the current directory to /tmp instead of removing
+	# this allows keeping the directory even if restoring the back-up tgz fails.
+	# use 'sudo' to perform 'mv' allow moving folders under system directories,
+	# while at the same time, does not alter the file ownership.
+	echo "Restoring ${1}..."
+	sudo mv ${2}/${1} /tmp/${1}.bak
+	sudo tar -C ${2} -xzf ${1}.tgz \
+	&& sudo rm -rf /tmp/${1}.bak \
+	|| sudo mv /tmp/${1}.bak ${2}/${1}
+}
+
+module='Desktop'
+parentDir=${HOME}
+restore_dir ${module} ${parentDir}
+
+module='Charger'
+parentDir=${HOME}
+restore_dir ${module} ${parentDir}
+
+module='Downloads'
+parentDir=${HOME}
+restore_dir ${module} ${parentDir}
+
+module='upfiles'
+parentDir=${HOME}
+restore_dir ${module} ${parentDir}
+
+module='Qt-5.12.4'
+parentDir=/usr/local
+restore_dir ${module} ${parentDir}
+
+module='html'
+parentDir=/var/www
+restore_dir ${module} ${parentDir}
+
+
+echo "Restore finished"
+popd

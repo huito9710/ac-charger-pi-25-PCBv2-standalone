@@ -1,0 +1,1 @@
+It is important that the owner of the 'evmega.conf' is root/root.

@@ -1,0 +1,165 @@
+#!/usr/bin/env python3
+
+import sys;
+import os, stat;
+import shutil;
+import inspect;
+import subprocess;
+
+contentarray = [];
+checkarray = [];
+def	checkmatch(text):
+	for content in contentarray:
+		if text == content:
+			checkarray.append(contentarray.index(content));
+			return;
+
+def	checkini():
+	if os.path.exists("/home/pi/upfiles/setting.ini"):
+
+		LoadManagementMsgtext = "[LoadManagementMsg]\n";
+		contentarray.append(LoadManagementMsgtext);
+
+		ChargingTimeMsgtext = "[ChargingTimeMsg]\n";
+		contentarray.append(ChargingTimeMsgtext);
+
+		RemainTimeMsgtext = "[RemainTimeMsg]\n";
+		contentarray.append(RemainTimeMsgtext);
+
+		VoltageMsgtext = "[VoltageMsg]\n";
+		contentarray.append(VoltageMsgtext);
+
+		CurrentTimeMsgtext = "[CurrentTimeMsg]\n";
+		contentarray.append(CurrentTimeMsgtext);
+
+		EnergyTimeMsgtext = "[EnergyTimeMsg]\n";
+		contentarray.append(EnergyTimeMsgtext);
+        
+		EnergyTimeMsgtext = "[EnergyTimeMsg]\n";
+		contentarray.append(EnergyTimeMsgtext);
+        
+		singlePhaseDisplaytext = "[singlePhaseDisplay]\n";
+		contentarray.append(singlePhaseDisplaytext);
+        
+		CTRatiotext = "[CTRatio]\n";
+		contentarray.append(CTRatiotext);
+
+		queueingModetext = "[queueingMode]\n";
+		contentarray.append(CTRatiotext);
+
+
+		inifile = open("/home/pi/upfiles/setting.ini", "r");
+		content = inifile.readlines();
+
+		for line in content:
+			checkmatch(line);
+		inifile.close();
+
+		inifile = open("/home/pi/upfiles/setting.ini", "a");
+		for item in contentarray:
+			if contentarray.index(item) not in checkarray:
+				inifile.writelines("\n" + item);
+				if item == singlePhaseDisplaytext:
+					inifile.writelines("0\n");
+				elif item == queueingModetext:
+					inifile.writelines("0\n");
+				else:
+					inifile.writelines("1\n");
+		inifile.close();
+	else:
+		raise Exception('Cannot find ini file');
+
+print('----- INSTALL begins -----');
+
+# Directories
+scriptFilename = inspect.getframeinfo(inspect.currentframe()).filename
+scriptDir = os.path.dirname(os.path.abspath(scriptFilename))
+chargerDir = '/home/pi/Charger';
+desktopDir = '/home/pi/Desktop';
+settingsDir = '/home/pi/upfiles';
+nfcctxDir = '/usr/local/etc/nfc';
+websiteDir = "/var/www";
+
+# file names
+versionTxt = 'VERSION.txt';
+chargerExe = 'ChargerV2';
+chargerTranslation = 'ChargerV2_zh_HK.qm';
+imagesDir = 'JPG';
+watchdogScript = "watchdog.sh";
+startupScript = "startCharger.sh";
+websiteName = "html";
+nfcctxName = "nfc"
+
+try:
+	# Installing ChargerV2 binary to /home/pi/Desktop/
+	print('Copying ', chargerExe);
+	dstPath = shutil.copy2(scriptDir + '/' + chargerExe, desktopDir);
+	if not dstPath:
+		raise;
+	print('copy2 returns: ', dstPath);
+	os.chmod(dstPath, stat.S_IRWXU|stat.S_IRWXG|stat.S_IROTH);
+	# Installing ChargerV2 translation file next to settings directory
+	print('Copying ', chargerTranslation);
+	dstPath = shutil.copy2(scriptDir + '/' + chargerTranslation, settingsDir);
+	if not dstPath:
+		raise;
+	print('copy2 returns: ', dstPath);
+	# Installing images to Charger directory
+	print('Copying ', imagesDir);
+	# Remove before Copy
+	shutil.rmtree(chargerDir + '/' + imagesDir);
+	dstPath = shutil.copytree(scriptDir + '/' + imagesDir, chargerDir + '/' + imagesDir);
+	if not dstPath:
+		raise;
+	print('copy2 returns: ', dstPath);
+	# Installing VERSION.txt to /home/pi/Charger/
+	print('Copying ', versionTxt);
+	dstPath = shutil.copy2(scriptDir + '/' + versionTxt, chargerDir);
+	if not dstPath:
+		raise;
+	print('copy2 returns: ', dstPath);
+    
+	print('Copying ', watchdogScript);
+	dstPath = shutil.copy2(scriptDir + '/' + watchdogScript, desktopDir);
+	if not dstPath:
+		raise;
+	print('copy2 returns: ', dstPath);
+    
+	print('Copying ', startupScript);
+	dstPath = shutil.copy2(scriptDir + '/' + startupScript, chargerDir);
+	if not dstPath:
+		raise;
+	print('copy2 returns: ', dstPath);
+	os.chmod(dstPath, stat.S_IRWXU|stat.S_IRWXG|stat.S_IROTH|stat.S_IEXEC);
+
+	try:
+		print('Copying ', websiteName);
+		shutil.rmtree(websiteDir + '/' + websiteName);
+		dstPath = shutil.copytree(scriptDir + '/' + websiteName, websiteDir + '/' + websiteName);
+		if not dstPath:
+			raise;
+		print('copy2 returns: ', dstPath);
+	except:
+		print('Error caught: ', sys.exc_info()[0]);
+    
+	try:
+		print('Copying ', nfcctxName);
+		shutil.rmtree('/etc/' + nfcctxName);
+		dstPath = shutil.copytree(scriptDir + '/' + nfcctxName, '/etc/' + nfcctxName);
+		if not dstPath:
+			raise;
+		print('copy2 returns: ', dstPath);
+	except:
+		print('Error caught: ', sys.exc_info()[0]);
+		    
+	print('----- INSTALL ends -----');
+
+	print("--start check ini file")
+	checkini();
+	print("--finsihed check ini")
+
+except:
+	print('Error caught: ', sys.exc_info()[0]);
+	sys.exit(os.EX_OSFILE);
+	
+sys.exit(os.EX_OK);

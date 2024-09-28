@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Charger
+Comment=Charger
+Exec=/home/pi/Charger/startCharger.sh
+Terminal=false
+MultipleArgs=false
+Type=Application
+Categories=Application;Development;
+StartupNotify=true

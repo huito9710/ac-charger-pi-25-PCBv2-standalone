@@ -1,0 +1,173 @@
+/* 全局通用
+----------------------------------------------- */
+body {
+    background-color: #EEEEEE;
+    font-family: Microsoft Yahei, \5FAE\8F6F\96C5\9ED1, \5B8B\4F53, Arial, Verdana, sans-serif, Monospace;
+    font-size: 16px;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+body, button, input, textarea {
+    font-size: 16px;
+    line-height: 1.531;
+    outline: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+body {
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+}
+    .tableSTYLE {
+        background-color: rgb(17, 118, 219);
+    }
+    .thSTYLE {
+        color: rgb(255, 255, 255);
+        font-weight: bold;
+        font-size: 25px;
+    }
+    .thSubSTYLE {
+        color: #000000;
+        background-color: rgb(145, 165, 175);
+        font-weight: bold;
+        font-size: 15px;
+    }
+    .tbDataSTYLE {
+        color: rgb(0, 0, 0);
+        font-size: 12px;
+    }
+    .tbLabelSTYLE {
+        color: #FFFFFF;
+        font-weight: bold;
+        font-size: 16px;
+    }
+    .editSTYLE {
+        color: rgb(0, 0, 0);
+        font-size: 16px;
+        height: 25px;
+    }
+    .btnSTYLE {
+        width: 60px;
+        height: 30px;
+        color: rgb(255, 255, 255);
+        background-color: rgb(25, 140, 194);
+        border-radius: 5px;
+    }
+    .numBtnSTYLE {
+        width: 100%;
+        height: 100%;
+        color: rgb(255, 255, 255);
+        background-color: rgb(25, 140, 194);
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 25px;
+    }
+    .checkboxSTYLE {
+        width: 20px;
+        height: 20px;
+        color: rgb(255, 255, 255);
+        background-color: rgb(25, 140, 194);
+        border-radius: 5px;
+    }
+
+    p, ul, ol, dl, dt, dd, form, blockquote {
+        margin: 0;
+        padding: 0;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        font-size: 12px;
+        margin: 0;
+        padding: 0;
+        font-weight: normal;
+    }
+    img {
+        border: 0;
+    }
+    a {
+        text-decoration: none;
+        color: rgb(228, 156, 22);
+    }
+    
+/*---------- 导航 ----------*/
+    #index .indexBox {
+        margin-bottom: 0px;
+    }
+    #index .indexBox em {
+        color:#999;
+    }
+
+    /*- ipage -*/
+    #index .indexBox .ipage {
+        overflow: hidden;
+    }
+    #index .indexBox .ipage a {
+        display: block;
+        background-color: rgba(11, 132, 245, 0.151);
+        color: #FFFFFF;
+        font-weight: bold;
+        /*border: 1px dotted #CCCCCC;*/
+        float: left;
+        width: 100%;
+        height: 100%;
+        line-height: 35px;
+        text-align: center;
+        margin: 0 0px 0px 0;
+    }
+
+    #index .indexBox .ipage a.indexSTYLE {
+        /*border: 1px dotted #EEEEEE;*/
+        background-color: rgba(34, 45, 109, 0.205);
+    }
+    #index .indexBox .ipage a.selectedSTYLE {
+        /*border: 1px dotted #EEEEEE;*/
+        /*background-color: rgba(163, 177, 87, 0.315);*/
+        background-color: #23D22F;
+    }
+    #index .indexBox .ipage a.bigBtnSTYLE {
+        /* border: 1px dotted #F6F6F6; */
+        display: block;
+        background-color: #008080;
+        color: #FFFFFF;
+        font-weight: bold;
+        /*border: 1px dotted #CCCCCC;*/
+        float: left;
+        width: 100%;
+        height: 100%;
+        line-height: 35px;
+        text-align: center;
+        margin: 0 0px 0px 0;
+        border-radius: 10px;
+        /*
+        background-color: #008080;
+        border-radius: 10px;
+        height: 60px;
+        line-height: 50px;*/
+    }
+    #index .indexBox .ipage a:hover {
+        /*border: 1px dotted #FFFFFF;*/
+        background: rgb(82, 175, 247) url(../images/icon_edit_white.png) no-repeat 12px 50%;
+        color: #FFF;
+    }
+
+    #btn:hover {
+        background: rgb(82, 175, 247);
+    }
+    #btn:active {
+        background: rgb(6, 65, 124);
+    }
+    #btn:focus {
+        border: 1px dotted #EEEEEE;
+    }
+    .line {
+        border-top: 1px solid rgb(10, 107, 252);
+        background-color: rgba(97, 243, 163, 0);
+        height: 1px;
+        line-height: 1px;
+        font-size: 0;
+        margin-left: 0px;
+    }
+    

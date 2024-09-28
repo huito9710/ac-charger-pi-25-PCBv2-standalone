@@ -1,0 +1,5 @@
+StrictHostKeyChecking=no
+BatchMode=yes
+Host h2.k-solution.com.hk
+IdentitiesOnly=yes
+IdentityFile=~/.ssh/id_rsa.evmegacharger.pem

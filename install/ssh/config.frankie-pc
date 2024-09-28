@@ -1,0 +1,5 @@
+StrictHostKeyChecking=no
+BatchMode=yes
+Host 192.168.1.102
+IdentitiesOnly=yes
+IdentityFile=~/.ssh/evmega_ssh.pem

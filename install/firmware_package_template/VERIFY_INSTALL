@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+
+import sys;
+import os;
+import subprocess;
+
+print('----- VERIFY-INSTALL begins -----');
+
+# Directories
+desktopDir = '/home/pi/Desktop';
+# file names
+chargerExe = 'ChargerV2';
+
+# run ChargerV2 with argument to start sanity-test, get the exit code of the ChargerV2
+try:
+	proc = subprocess.run([desktopDir + '/' + chargerExe, '--sanity-test'],  stdout=subprocess.PIPE, stderr=subprocess.PIPE);
+	print('Output: ', proc.stdout);
+	print('Error: ', proc.stderr);
+	if proc.returncode != 0:
+		raise Exception(chargerExe + ' failed with code ' + str(proc.returncode) + str(proc.stdout) + str(proc.stderr));  
+	print('----- VERIFY-INSTALL ends -----');	
+except Exception as e:
+	print('Error caught: ', str(e));
+	sys.exit(proc.returncode);
+except:
+	print('Error caught: ', sys.exc_info()[0]);
+	sys.exit(-1);
+sys.exit(os.EX_OK);
